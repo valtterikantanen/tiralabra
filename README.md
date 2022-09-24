@@ -4,12 +4,14 @@ Sovellus on laadittu Helsingin yliopiston syksyn 2022 kurssille [Aineopintojen h
 
 ## Dokumentaatio
 
-[Määrittelydokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/maarittelydokumentti.md)
+* [Määrittelydokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/maarittelydokumentti.md)
+* [Testausdokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/testausdokumentti.md)
 
 ### Viikkoraportit
 
 * [Viikko 1](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti1.md)
 * [Viikko 2](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti2.md)
+* [Viikko 3](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti3.md)
 
 ## Huomautuksia
 
