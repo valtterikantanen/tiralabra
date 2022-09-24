@@ -35,20 +35,20 @@ def make_adjacency_lists(filename):
                 # Viistoon voidaan liikkua vain, jos kaksi sen viereistä ruutua ovat vapaana
                 if option[0] != 0 and option[1] != 0:
                     if option == (-1, -1):
-                        if map_rows[i-1][j] != empty or map_rows[i][j-1] != empty:
+                        if map_rows[i-1][j] != empty or row[j-1] != empty:
                             continue
                     elif option == (-1, 1):
-                        if map_rows[i-1][j] != empty or map_rows[i][j+1] != empty:
+                        if map_rows[i-1][j] != empty or row[j+1] != empty:
                             continue
                     elif option == (1, -1):
-                        if map_rows[i][j-1] != empty or map_rows[i+1][j] != empty:
+                        if row[j-1] != empty or map_rows[i+1][j] != empty:
                             continue
                     elif option == (1, 1):
-                        if map_rows[i][j+1] != empty or map_rows[i+1][j] != empty:
+                        if row[j+1] != empty or map_rows[i+1][j] != empty:
                             continue
                 if map_rows[y_coord][x_coord] == empty:
                     # Jos liikuttiin vaaka- tai pystysuunnassa, kaaren paino on 1, muuten sqrt(2)
                     weight = 1 if option[0] == 0 or option[1] == 0 else sqrt(2)
                     endpoint = y_coord * width + x_coord
                     graph[node].append((weight, endpoint))
-    return graph
+    return graph, map_rows
