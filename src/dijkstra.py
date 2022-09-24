@@ -1,16 +1,18 @@
-from heapq import heappush, heappop
 from math import inf
+
+from heap import Heap
 
 def dijkstra(graph, start, end):
     # Alustetaan kaikki solmut käsittelemättömiksi
     visited = [False for _ in range(len(graph))]
-    heap = []
+    previous = [None for _ in range(len(graph))]
+    heap = Heap()
     # Alustetaan aloitussolmua lukuun ottamatta kaikkien solmujen etäisyyksiksi ääretön
     distances = {node: inf for node in range(len(graph))}
     distances[start] = 0
-    heappush(heap, (0, start))
-    while len(heap) > 0:
-        node = heappop(heap)[1]
+    heap.insert((0, start))
+    while not heap.is_empty():
+        node = heap.extract()[1]
         if visited[node]:
             continue
         visited[node] = True
@@ -19,6 +21,13 @@ def dijkstra(graph, start, end):
             current_distance = distances[edge[1]]
             new_distance = distances[node] + edge[0]
             if new_distance < current_distance:
+                previous[edge[1]] = node
                 distances[edge[1]] = new_distance
-                heappush(heap, (new_distance, edge[1]))
-    return distances[end]
+                heap.insert((new_distance, edge[1]))
+    route = []
+    route.append(end)
+    i = end
+    while previous[i] is not None:
+        route.append(previous[i])
+        i = previous[i]
+    return route, distances[end]
