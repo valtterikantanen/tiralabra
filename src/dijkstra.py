@@ -15,6 +15,8 @@ def dijkstra(graph, start, end):
         node = heap.extract()[1]
         if visited[node]:
             continue
+        if node == end:
+            break
         visited[node] = True
         for edge in graph[node]:
             # Vieruslistan alkiot ovat muotoa (paino, tunnus)
@@ -24,10 +26,9 @@ def dijkstra(graph, start, end):
                 previous[edge[1]] = node
                 distances[edge[1]] = new_distance
                 heap.insert((new_distance, edge[1]))
-    route = []
-    route.append(end)
+    route = [end]
     i = end
     while previous[i] is not None:
-        route.append(previous[i])
+        route.insert(0, previous[i])
         i = previous[i]
-    return route, distances[end]
+    return route, visited, distances[end]
