@@ -6,6 +6,7 @@ Sovellus on laadittu Helsingin yliopiston syksyn 2022 kurssille [Aineopintojen h
 
 * [Määrittelydokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/maarittelydokumentti.md)
 * [Testausdokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/testausdokumentti.md)
+* [Toteutusdokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/toteutusdokumentti.md)
 
 ### Viikkoraportit
 

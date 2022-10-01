@@ -16,10 +16,10 @@ Harjoitustyön laatijan opinto-ohjelma on tietojenkäsittelytieteen kandiohjelma
 
 ## Lähteet
 
-Torikka, Oskari: [_A*-algoritmi ja siihen pohjautuvat muistirajoitetut heuristiset reitinhakualgoritmit_](https://erepo.uef.fi/bitstream/handle/123456789/14693/urn_nbn_fi_uef-20150206.pdf?sequence=1&isAllowed=y)
+Torikka, Oskari: [_A*-algoritmi ja siihen pohjautuvat muistirajoitetut heuristiset reitinhakualgoritmit_](https://erepo.uef.fi/bitstream/handle/123456789/14693/urn_nbn_fi_uef-20150206.pdf?sequence=1&isAllowed=y).
 
-Laaksonen, Antti: [_Tietorakenteet ja algoritmit_](https://raw.githubusercontent.com/hy-tira/tirakirja/master/tirakirja.pdf)
+Laaksonen, Antti: [_Tietorakenteet ja algoritmit_](https://raw.githubusercontent.com/hy-tira/tirakirja/master/tirakirja.pdf).
 
-Kord, Richard ym.: [_Time complexity of iterative-deepening-A∗_](https://www.sciencedirect.com/science/article/pii/S0004370201000947/pdf?md5=6685f651efae7e0f243de5d7d4522aba&pid=1-s2.0-S0004370201000947-main.pdf)
+Kord, Richard ym.: [*Time complexity of iterative-deepening-A\**](https://www.sciencedirect.com/science/article/pii/S0004370201000947/pdf?md5=6685f651efae7e0f243de5d7d4522aba&pid=1-s2.0-S0004370201000947-main.pdf).
 
-[_Iterative deepening A*_](https://en.wikipedia.org/wiki/Iterative_deepening_A*)
+[*Iterative deepening A\**](https://en.wikipedia.org/wiki/Iterative_deepening_A*).
