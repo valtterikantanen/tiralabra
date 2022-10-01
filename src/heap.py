@@ -2,10 +2,10 @@ from math import floor
 
 # Minimikeon toteuttava luokka
 
-# Taulukon indeksointi alkaa 1:stä
-# Pienin alkio aina juuressa eli indeksissä 1
-# Jos solmu on kohdassa k, niin vasen lapsi on kohdassa 2k, oikea lapsi kohdassa 2k+1 ja vanhempi kohdassa floor(k/2)
-# Pienimmän alkion löytäminen ajassa O(1), alkion lisääminen tai pienimmän alkion poistaminen ajassa O(log n)
+# Taulukon indeksointi alkaa 1:stä, ja pienin alkio on aina juuressa eli indeksissä 1.
+# Jos solmu on indeksissä k, niin vasen lapsi on kohdassa 2k, oikea lapsi kohdassa 2k+1
+# ja vanhempi kohdassa floor(k/2). Pienimmän alkion löytäminen tapahtuu ajassa O(1),
+# alkion lisääminen tai pienimmän alkion poistaminen ajassa O(log n).
 
 class Heap:
     def __init__(self):
