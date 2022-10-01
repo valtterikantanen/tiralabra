@@ -16,7 +16,7 @@ class TestDijkstra(unittest.TestCase):
             start_and_end, test_distance = choice(list(self.known_distances.items()))
             start = start_and_end[0]
             end = start_and_end[1]
-            distance = dijkstra(self.adjacency_lists, start, end)[1]
+            distance = dijkstra(self.adjacency_lists, start, end)[2]
             # Tarkistetaan, että arvot vastaavat toisiaan kuuden desimaalin tarkkuudella
             self.assertAlmostEqual(distance, test_distance, 6)
 
