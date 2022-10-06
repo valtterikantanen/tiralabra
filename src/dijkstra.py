@@ -27,9 +27,16 @@ def dijkstra(graph, start, end):
                 previous[edge[1]] = node
                 distances[edge[1]] = new_distance
                 heap.insert((new_distance, edge[1]))
-    route = [end]
-    i = end
-    while previous[i] is not None:
-        route.insert(0, previous[i])
-        i = previous[i]
+    route = _create_route(previous, end)
+
     return route, visited, distances[end]
+
+
+def _create_route(previous_nodes, end_node):
+    route = [end_node]
+    i = end_node
+    while previous_nodes[i] is not None:
+        route.insert(0, previous_nodes[i])
+        i = previous_nodes[i]
+
+    return route

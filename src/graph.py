@@ -2,6 +2,41 @@ from math import sqrt
 
 
 def make_adjacency_lists(filename):
+    map_rows = _create_map_from_file(filename)
+
+    height = len(map_rows)
+    width = len(map_rows[0])
+
+    # Esitetään verkko vieruslistoina ja alustetaan jokainen lista tyhjäksi
+    graph = [[] for _ in range(height * width)]
+
+    empty = "."
+
+    # Rivin numero = y-koordinaatti
+    for i, row in enumerate(map_rows):
+        # Sarakkeen numero = x-koordinaatti
+        for j, column in enumerate(row):
+            if column != empty:
+                continue
+            # Käydään läpi kaikki mahdolliset naapurisolmut
+            for option in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]:
+                y_coord = i + option[0]
+                x_coord = j + option[1]
+                # Tarkistetaan, menevätkö koordinaatit reunojen yli
+                if not 0 <= x_coord < width or not 0 <= y_coord < height:
+                    continue
+                # Viistoon voidaan liikkua vain, jos kaksi sen viereistä ruutua ovat vapaana
+                if 0 not in option and map_rows[y_coord][j] != empty or row[x_coord] != empty:
+                    continue
+                if map_rows[y_coord][x_coord] == empty:
+                    # Jos liikuttiin vaaka- tai pystysuunnassa, kaaren paino on 1, muuten sqrt(2)
+                    weight = 1 if 0 in option else sqrt(2)
+                    # Solmun tunnus saadaan kaavalla leveys * y-koordinaatti + x-koordinaatti
+                    endpoint = width * y_coord + x_coord
+                    graph[width * i + j].append((weight, endpoint))
+    return graph, map_rows
+
+def _create_map_from_file(filename):
     with open(filename) as file:
         map_rows = []
 
@@ -11,47 +46,4 @@ def make_adjacency_lists(filename):
                 line = line.replace("\n", "")
                 row = list(line)
                 map_rows.append(row)
-
-    height = len(map_rows)
-    width = len(map_rows[0])
-
-    # Esitetään verkko vieruslistoina ja alustetaan jokainen lista tyhjäksi
-    graph = [[] for _ in range(height * width)]
-
-    empty = "."
-    occupied = "@"
-
-    # rivin numero = y-koordinaatti (0–255)
-    for i, row in enumerate(map_rows):
-        # sarakkeen numero = x-koordinaatti (0–255)
-        for j, column in enumerate(row):
-            if column == occupied:
-                continue
-            node = i * width + j
-            # Käydään läpi kaikki mahdolliset naapurisolmut
-            for option in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]:
-                y_coord = i + option[0]
-                x_coord = j + option[1]
-                # Tarkistetaan, menevätkö koordinaatit reunojen yli
-                if not 0 <= x_coord < width or not 0 <= y_coord < height:
-                    continue
-                # Viistoon voidaan liikkua vain, jos kaksi sen viereistä ruutua ovat vapaana
-                if option[0] != 0 and option[1] != 0:
-                    if option == (-1, -1):
-                        if map_rows[i-1][j] != empty or row[j-1] != empty:
-                            continue
-                    elif option == (-1, 1):
-                        if map_rows[i-1][j] != empty or row[j+1] != empty:
-                            continue
-                    elif option == (1, -1):
-                        if row[j-1] != empty or map_rows[i+1][j] != empty:
-                            continue
-                    elif option == (1, 1):
-                        if row[j+1] != empty or map_rows[i+1][j] != empty:
-                            continue
-                if map_rows[y_coord][x_coord] == empty:
-                    # Jos liikuttiin vaaka- tai pystysuunnassa, kaaren paino on 1, muuten sqrt(2)
-                    weight = 1 if option[0] == 0 or option[1] == 0 else sqrt(2)
-                    endpoint = y_coord * width + x_coord
-                    graph[node].append((weight, endpoint))
-    return graph, map_rows
+    return map_rows

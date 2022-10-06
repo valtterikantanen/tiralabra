@@ -41,6 +41,12 @@ class Heap:
         last_item = self.__heap.pop()
         self.__heap[1] = last_item
 
+        self._restore_heap_condition()
+
+        return smallest_item
+
+    # Palauttaa kekoehdon voimaan alkion poiston jälkeen
+    def _restore_heap_condition(self):
         # Lasketaan juureen nostettua alkiota alaspäin, kunnes kekoehto on jälleen voimassa
         position = 1
         left_child_position = 2 * position
@@ -61,8 +67,6 @@ class Heap:
             self.__heap[smaller_child_position] = parent
             position = smaller_child_position
             left_child_position = 2 * smaller_child_position
-
-        return smallest_item
 
     def size(self):
         return len(self.__heap) - 1
