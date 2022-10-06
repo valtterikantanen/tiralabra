@@ -1,5 +1,6 @@
 from math import sqrt, inf
 
+
 def ida_star(graph, start_node, goal_node):
     visited_nodes = [False for _ in range(len(graph))]
     # Otetaan arvioksi lyhin mahdollinen etäisyys lähtösolmusta maalisolmuun
@@ -14,6 +15,7 @@ def ida_star(graph, start_node, goal_node):
         if threshold == inf:
             return False
         bound = threshold
+
 
 def _search(graph, path, g_score, bound, goal_node, visited_nodes):
     # Valitaan käsiteltäväksi polun viimeinen solmu
@@ -40,6 +42,7 @@ def _search(graph, path, g_score, bound, goal_node, visited_nodes):
                 minimum = threshold
             path.pop()
     return minimum
+
 
 def _estimate_shortest_path(start_node, end_node, width):
     # Muutetaan ruutujen numerot x- ja y-koordinaateiksi

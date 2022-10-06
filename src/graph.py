@@ -1,5 +1,6 @@
 from math import sqrt
 
+
 def make_adjacency_lists(filename):
     with open(filename) as file:
         map_rows = []
@@ -20,8 +21,10 @@ def make_adjacency_lists(filename):
     empty = "."
     occupied = "@"
 
-    for i, row in enumerate(map_rows): # rivin numero = y-koordinaatti (0–255)
-        for j, column in enumerate(row): # sarakkeen numero = x-koordinaatti (0–255)
+    # rivin numero = y-koordinaatti (0–255)
+    for i, row in enumerate(map_rows):
+        # sarakkeen numero = x-koordinaatti (0–255)
+        for j, column in enumerate(row):
             if column == occupied:
                 continue
             node = i * width + j

@@ -2,6 +2,7 @@ from math import inf
 
 from heap import Heap
 
+
 def dijkstra(graph, start, end):
     # Alustetaan kaikki solmut käsittelemättömiksi
     visited = [False for _ in range(len(graph))]

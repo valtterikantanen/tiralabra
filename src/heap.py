@@ -7,6 +7,7 @@ from math import floor
 # ja vanhempi kohdassa floor(k/2). Pienimmän alkion löytäminen tapahtuu ajassa O(1),
 # alkion lisääminen tai pienimmän alkion poistaminen ajassa O(log n).
 
+
 class Heap:
     def __init__(self):
         self.__heap = [None]

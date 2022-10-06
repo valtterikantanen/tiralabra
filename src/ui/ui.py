@@ -6,6 +6,7 @@ from dijkstra import dijkstra
 from graph import make_adjacency_lists
 from ida_star import ida_star
 
+
 class UI:
 
     def __init__(self, root):
@@ -13,7 +14,7 @@ class UI:
         self._root.configure(bg="#F0F0F0")
         self._MAP_WIDTH = 400
         self._map = Canvas(master=self._root, height=self._MAP_WIDTH, width=self._MAP_WIDTH)
-        
+
         self._chosen_algorithm = StringVar()
         self._start_node = StringVar()
         self._end_node = StringVar()
@@ -23,18 +24,19 @@ class UI:
         self._graph = None
         self._row_length = None
         self._available_maps = []
-        
+
         self._get_available_maps()
         self._selected_map = StringVar(value=self._available_maps[0])
         self._create_map()
-    
+
     def start(self):
         time_label = ttk.Label(master=self._root, background="#F0F0F0", text="Aikaa kului")
-        time_elapsed = ttk.Label(master=self._root, background="#F0F0F0", textvariable=self._used_time)
+        time_elapsed = ttk.Label(master=self._root, background="#F0F0F0",
+                                 textvariable=self._used_time)
 
         distance_label = ttk.Label(master=self._root, background="#F0F0F0", text="Reitin pituus")
-        distance = ttk.Label(
-            master=self._root, background="#F0F0F0", textvariable=self._shortest_path_length)
+        distance = ttk.Label(master=self._root, background="#F0F0F0",
+                             textvariable=self._shortest_path_length)
 
         start_node_label = ttk.Label(master=self._root, background="#F0F0F0", text="Lähtöruutu")
         start_node_entry = ttk.Entry(master=self._root, textvariable=self._start_node)
@@ -42,25 +44,20 @@ class UI:
         goal_node_label = ttk.Label(master=self._root, background="#F0F0F0", text="Maaliruutu")
         goal_node_entry = ttk.Entry(master=self._root, textvariable=self._end_node)
 
-        selected_map_label = ttk.Label(master=self._root, background="#F0F0F0", text="Valitse kartta")
+        selected_map_label = ttk.Label(
+            master=self._root, background="#F0F0F0", text="Valitse kartta")
         selected_map_dropdown = ttk.OptionMenu(
-            self._root, self._selected_map, self._available_maps[0],
-            *self._available_maps, command=self._create_map
-        )
+            self._root, self._selected_map, self._available_maps[0], *self._available_maps, command=self._create_map)
 
         own_style = ttk.Style()
         own_style.configure("Own.TRadiobutton", background="#F0F0F0")
 
         algorithm_label = ttk.Label(
             master=self._root, background="#F0F0F0", text="Valitse algoritmi")
-        ida_star_button = ttk.Radiobutton(
-            master=self._root, text="IDA*", style="Own.TRadiobutton",
-            variable=self._chosen_algorithm, takefocus=0, value="IDA*"
-        )
-        dijkstra_button = ttk.Radiobutton(
-            master=self._root, text="Dijkstra", style="Own.TRadiobutton",
-            variable=self._chosen_algorithm, takefocus=0, value="Dijkstra"
-        )
+        ida_star_button = ttk.Radiobutton(master=self._root, text="IDA*", style="Own.TRadiobutton",
+                                          variable=self._chosen_algorithm, takefocus=0, value="IDA*")
+        dijkstra_button = ttk.Radiobutton(master=self._root, text="Dijkstra", style="Own.TRadiobutton",
+                                          variable=self._chosen_algorithm, takefocus=0, value="Dijkstra")
 
         find_route_btn = ttk.Button(
             master=self._root, text="Löydä lyhin reitti", command=self._handle_find_route)
@@ -81,17 +78,18 @@ class UI:
         goal_node_entry.grid(row=3, column=2)
 
         selected_map_label.grid(row=4, column=1)
-        selected_map_dropdown.grid(row=4, column=2, sticky=(constants.E, constants.W), padx=5, pady=5)
+        selected_map_dropdown.grid(row=4, column=2, sticky=(
+            constants.E, constants.W), padx=5, pady=5)
 
         algorithm_label.grid(row=5, column=0, padx=5, pady=5)
         ida_star_button.grid(row=5, column=1, padx=5, pady=5)
         dijkstra_button.grid(row=5, column=2, padx=5, pady=5)
 
-        find_route_btn.grid(
-            row=6, column=0, columnspan=3, sticky=(constants.E, constants.W), padx=5, pady=5)
+        find_route_btn.grid(row=6, column=0, columnspan=3, sticky=(
+            constants.E, constants.W), padx=5, pady=5)
 
-        reset_btn.grid(
-            row=7, column=0, columnspan=3, sticky=(constants.E, constants.W), padx=5, pady=5)
+        reset_btn.grid(row=7, column=0, columnspan=3, sticky=(
+            constants.E, constants.W), padx=5, pady=5)
 
     def _create_map(self, map=None):
         map_file = self._selected_map.get() if map is None else map
@@ -103,9 +101,7 @@ class UI:
             for x, column in enumerate(row):
                 color = "black" if column == "@" else "white"
                 self._map.create_rectangle(
-                    (square_size*x, square_size*y, square_size*(x+1), square_size*(y+1)),
-                    width=0, fill=color
-                )
+                    (square_size*x, square_size*y, square_size*(x+1), square_size*(y+1)), width=0, fill=color)
 
     def _update_map(self, route, visited_nodes):
         self._create_map()
@@ -123,9 +119,7 @@ class UI:
                 else:
                     continue
                 self._map.create_rectangle(
-                    (square_size*x, square_size*y, square_size*(x+1), square_size*(y+1)),
-                    width=0, fill=color
-                )
+                    (square_size*x, square_size*y, square_size*(x+1), square_size*(y+1)), width=0, fill=color)
 
     def _get_available_maps(self):
         for file in os.listdir("src/maps"):

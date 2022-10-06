@@ -5,6 +5,7 @@ import unittest
 from dijkstra import dijkstra
 from graph import make_adjacency_lists
 
+
 class TestDijkstra(unittest.TestCase):
     def setUp(self):
         self.adjacency_lists = make_adjacency_lists("src/maps/Berlin_0_256.map")[0]
@@ -19,6 +20,7 @@ class TestDijkstra(unittest.TestCase):
             distance = dijkstra(self.adjacency_lists, start, end)[2]
             # Tarkistetaan, että arvot vastaavat toisiaan kuuden desimaalin tarkkuudella
             self.assertAlmostEqual(distance, test_distance, 6)
+
 
 def collect_known_distances(filename):
     with open(filename) as file:

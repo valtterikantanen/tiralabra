@@ -1,6 +1,7 @@
 from dijkstra import dijkstra
 from graph import make_adjacency_lists
 
+
 def collect_known_distances(filename):
     with open(filename) as file:
         distances = {}
@@ -14,6 +15,7 @@ def collect_known_distances(filename):
             distances[(start, end)] = float(line[8])
     return distances
 
+
 def write_test_results(graph, correct_distances, filename):
     with open(filename, "w") as file:
         file.write("start_node;end_node;calculated_distance;known_distance;difference\n")
@@ -23,6 +25,7 @@ def write_test_results(graph, correct_distances, filename):
             distance = dijkstra(graph, start, end)[1]
             difference = abs(distance - value)
             file.write(f"{start};{end};{distance};{value};{difference}\n")
+
 
 if __name__ == "__main__":
     adjacency_lists = make_adjacency_lists("src/maps/Berlin_0_256.map")[0]

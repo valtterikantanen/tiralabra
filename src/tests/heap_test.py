@@ -5,6 +5,7 @@ from random import randint
 
 from heap import Heap
 
+
 class TestHeap(unittest.TestCase):
     def setUp(self):
         self.heap = Heap()
