@@ -1,6 +1,7 @@
+import os
 import time
 
-from tkinter import Tk, ttk, constants, StringVar, Canvas
+from tkinter import ttk, constants, StringVar, Canvas
 from dijkstra import dijkstra
 from graph import make_adjacency_lists
 from ida_star import ida_star
@@ -21,7 +22,10 @@ class UI:
 
         self._graph = None
         self._row_length = None
+        self._available_maps = []
         
+        self._get_available_maps()
+        self._selected_map = StringVar(value=self._available_maps[0])
         self._create_map()
     
     def start(self):
@@ -37,6 +41,12 @@ class UI:
 
         goal_node_label = ttk.Label(master=self._root, background="#F0F0F0", text="Maaliruutu")
         goal_node_entry = ttk.Entry(master=self._root, textvariable=self._end_node)
+
+        selected_map_label = ttk.Label(master=self._root, background="#F0F0F0", text="Valitse kartta")
+        selected_map_dropdown = ttk.OptionMenu(
+            self._root, self._selected_map, self._available_maps[0],
+            *self._available_maps, command=self._create_map
+        )
 
         own_style = ttk.Style()
         own_style.configure("Own.TRadiobutton", background="#F0F0F0")
@@ -57,7 +67,7 @@ class UI:
 
         reset_btn = ttk.Button(master=self._root, text="Tyhjennä", command=self._handle_reset)
 
-        self._map.grid(row=0, column=0, rowspan=4)
+        self._map.grid(row=0, column=0, rowspan=5)
         time_label.grid(row=0, column=1)
         time_elapsed.grid(row=0, column=2)
 
@@ -70,18 +80,22 @@ class UI:
         goal_node_label.grid(row=3, column=1)
         goal_node_entry.grid(row=3, column=2)
 
-        algorithm_label.grid(row=4, column=0, padx=5, pady=5)
-        ida_star_button.grid(row=4, column=1, padx=5, pady=5)
-        dijkstra_button.grid(row=4, column=2, padx=5, pady=5)
+        selected_map_label.grid(row=4, column=1)
+        selected_map_dropdown.grid(row=4, column=2, sticky=(constants.E, constants.W), padx=5, pady=5)
+
+        algorithm_label.grid(row=5, column=0, padx=5, pady=5)
+        ida_star_button.grid(row=5, column=1, padx=5, pady=5)
+        dijkstra_button.grid(row=5, column=2, padx=5, pady=5)
 
         find_route_btn.grid(
-            row=5, column=0, columnspan=3, sticky=(constants.E, constants.W), padx=5, pady=5)
-
-        reset_btn.grid(
             row=6, column=0, columnspan=3, sticky=(constants.E, constants.W), padx=5, pady=5)
 
-    def _create_map(self):
-        self._graph, map_rows = make_adjacency_lists("src/maps/Map_20.map")
+        reset_btn.grid(
+            row=7, column=0, columnspan=3, sticky=(constants.E, constants.W), padx=5, pady=5)
+
+    def _create_map(self, map=None):
+        map_file = self._selected_map.get() if map is None else map
+        self._graph, map_rows = make_adjacency_lists(f"src/maps/{map_file}")
         self._row_length = len(map_rows)
         square_size = self._MAP_WIDTH / self._row_length
 
@@ -112,6 +126,11 @@ class UI:
                     (square_size*x, square_size*y, square_size*(x+1), square_size*(y+1)),
                     width=0, fill=color
                 )
+
+    def _get_available_maps(self):
+        for file in os.listdir("src/maps"):
+            if file.endswith(".map"):
+                self._available_maps.append(file)
 
     def _handle_find_route(self):
         algorithm = self._chosen_algorithm.get()

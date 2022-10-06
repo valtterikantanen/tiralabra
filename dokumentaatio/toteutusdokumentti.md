@@ -35,8 +35,6 @@ Osien toiminta on pääasiassa seuraavanlainen:
 ## Yleistä ohjelman käytöstä
 Asennuksen jälkeen ohjelma käynnistetään komennolla `poetry run invoke start`. Graafisessa käyttöliittymässä ilmoitetaan lähtö- ja maaliruutujen koordinaatit pilkulla erotettuna (esim. `0,0`). Tämän jälkeen valitaan käytettävä algoritmi ja painetaan "Löydä lyhin reitti", jolloin ohjelma näyttää laskentaan käytetyn ajan ja löydetyn reitin pituuden. Ohjelma myös piirtää reitin karttaan. Alussa ruudut ovat joko valkoisia (vapaita) tai mustia (esteitä). Reitin löydyttyä lähtö- ja maaliruudut merkitään vihreällä, muut reittiin kuuluvat ruudut punaisella ja muut vieraillut ruudut keltaisella.
 
-Tällä hetkellä valitettavasti ainoa tapa vaihtaa käytettävää karttaa on muuttaa [`/ui/ui.py`](https://github.com/valtterikantanen/tiralabra/tree/master/src/ui/ui.py)-tiedoston riviä 84, jossa käytettävä kartta on määritelty.
-
 ## Tietorakenteet ja algoritmit
 
 ### Dijkstran algoritmi
