@@ -14,6 +14,7 @@ Sovellus on laadittu Helsingin yliopiston syksyn 2022 kurssille [Aineopintojen h
 * [Viikko 2](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti2.md)
 * [Viikko 3](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti3.md)
 * [Viikko 4](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti4.md)
+* [Viikko 5](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti5.md)
 
 ## Asennus ja käyttö
 

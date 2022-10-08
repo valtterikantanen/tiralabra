@@ -53,7 +53,7 @@ Lopuksi muodostetaan vielä lista reitin muodostavista solmuista. Funktio palaut
 ## Aika- ja tilavaativuudet
 
 ## Suorituskykyvertailu
+Dijkstran algoritmin toimintaa on testattu 930 eri syöttellä 256×256-kokoisessa kartassa. Kaikissa tapauksissa ohjelma löysi oikean lyhimmän reitin. Testaus tehtiin [esimerkkiskenaarioiden](https://github.com/valtterikantanen/tiralabra/blob/master/src/maps/Berlin_0_256.map.scen) avulla. 930 eri testitapauksen ajo kesti 240 sekuntia eli yhdessä tapauksessa kului aikaa  keskimäärin 0,258 sekuntia.
 
 ## Lähteet
-
 Laaksonen, Antti: [_Tietorakenteet ja algoritmit_](https://raw.githubusercontent.com/hy-tira/tirakirja/master/tirakirja.pdf), s. 123–127.
