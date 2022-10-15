@@ -1,19 +1,24 @@
 from math import floor
 
-# Minimikeon toteuttava luokka
-
-# Taulukon indeksointi alkaa 1:stä, ja pienin alkio on aina juuressa eli indeksissä 1.
-# Jos solmu on indeksissä k, niin vasen lapsi on kohdassa 2k, oikea lapsi kohdassa 2k+1
-# ja vanhempi kohdassa floor(k/2). Pienimmän alkion löytäminen tapahtuu ajassa O(1),
-# alkion lisääminen tai pienimmän alkion poistaminen ajassa O(log n).
-
 
 class Heap:
+    """Minimikeon toteuttava luokka.
+    """
+
     def __init__(self):
+        """Luokan konstruktori, joka luo uuden keon.
+        """
+
         self.__heap = [None]
 
-    # Lisää alkion kekoon
     def insert(self, item):
+        """Lisää annetun alkion kekoon ajassa O(log n).
+
+        Args:
+            item: Kekoon lisättävä alkio. Jos alkio on tuple, järjestäminen tapahtuu tuplen
+            ensimmäisen alkion perusteella.
+        """
+
         self.__heap.append(item)
         position = self.size()
 
@@ -27,8 +32,13 @@ class Heap:
             else:
                 break
 
-    # Poistaa pienimmän alkion keosta
     def extract(self):
+        """Poistaa pienimmän alkion keosta ajassa O(log n).
+
+        Returns:
+            Keon pienin alkio.
+        """
+
         # Jos keossa oli enintään yksi solmu ennen poistoa, ei ole siirrettäviä lapsisolmuja
         if self.is_empty():
             return None
@@ -45,8 +55,10 @@ class Heap:
 
         return smallest_item
 
-    # Palauttaa kekoehdon voimaan alkion poiston jälkeen
     def _restore_heap_condition(self):
+        """Palauttaa kekoehdon voimaan alkion poiston jälkeen.
+        """
+
         # Lasketaan juureen nostettua alkiota alaspäin, kunnes kekoehto on jälleen voimassa
         position = 1
         left_child_position = 2 * position
@@ -69,10 +81,28 @@ class Heap:
             left_child_position = 2 * smaller_child_position
 
     def size(self):
+        """Palauttaa keon koon.
+
+        Returns:
+            Keon koko kokonaislukuna.
+        """
+
         return len(self.__heap) - 1
 
     def is_empty(self):
+        """Palauttaa tiedon siitä, onko keko tyhjä.
+
+        Returns:
+            True, jos keko on tyhjä ja False, jos ei ole.
+        """
+
         return self.size() == 0
 
     def __str__(self):
+        """Palauttaa keon kuvauksen merkkijonona.
+
+        Returns:
+            Keko merkkijonona, jonka sisältönä on lista keon alkioista.
+        """
+
         return f"{self.__heap[1:]}"

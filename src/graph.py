@@ -2,6 +2,15 @@ from math import sqrt
 
 
 def make_adjacency_lists(filename):
+    """Muodostaa annetun tiedoston perusteella verkon vieruslistamuodossa.
+
+    Args:
+        filename: Polku tiedostoon
+
+    Returns:
+        Tuple, jossa on verkko vieruslistamuodossa sekä parametrina annettu kartta matriisimuodossa.
+    """
+
     map_rows = _create_map_from_file(filename)
 
     height = len(map_rows)
@@ -37,6 +46,15 @@ def make_adjacency_lists(filename):
     return graph, map_rows
 
 def _create_map_from_file(filename):
+    """Muodostaa annetusta karttatiedostosta listan.
+
+    Args:
+        filename: Polku tiedostoon
+
+    Returns:
+        Kartta matriisimuodossa, jossa yksi kartan rivi muodostaa yhden listan matriisin sisällä.
+    """
+
     with open(filename) as file:
         map_rows = []
 

@@ -4,6 +4,18 @@ from heap import Heap
 
 
 def dijkstra(graph, start, end):
+    """Määrittää lyhimmän reitin kahden solmun välillä annetussa verkossa.
+
+    Args:
+        graph: Käytettävä verkko vieruslistamuodossa
+        start: Aloitussolmun tunnus
+        end: Maalisolmun tunnus
+
+    Returns:
+        Tuple, jossa on lista reittiin kuuluvista solmuista, lista siitä, onko kussakin verkon
+        solmussa vierailtu vai ei sekä aloitussolmun ja maalisolmun välinen etäisyys.
+    """
+
     # Alustetaan kaikki solmut käsittelemättömiksi
     visited = [False for _ in range(len(graph))]
     previous = [None for _ in range(len(graph))]
@@ -33,6 +45,16 @@ def dijkstra(graph, start, end):
 
 
 def _create_route(previous_nodes, end_node):
+    """Muodostaa polun maalisolmusta aloitussolmuun.
+
+    Args:
+        previous_nodes: Lista, jossa on tieto kunkin solmun edeltäjästä
+        end_node: Maalisolmun tunnus
+
+    Returns:
+        Löydetty reitti listana.
+    """
+
     route = [end_node]
     i = end_node
     while previous_nodes[i] is not None:
