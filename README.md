@@ -15,6 +15,7 @@ Sovellus on laadittu Helsingin yliopiston syksyn 2022 kurssille [Aineopintojen h
 * [Viikko 3](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti3.md)
 * [Viikko 4](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti4.md)
 * [Viikko 5](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti5.md)
+* [Viikko 6](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/viikkoraportit/viikkoraportti6.md)
 
 ## Asennus ja käyttö
 
@@ -45,6 +46,10 @@ $ poetry run invoke test
 Testikattavuusraportin luominen
 ```
 $ poetry run invoke coverage-report
+```
+Suorituskykytestien suorittaminen
+```
+$ poetry run invoke perf-test
 ```
 Pylint-tarkistusten suorittaminen
 ```
