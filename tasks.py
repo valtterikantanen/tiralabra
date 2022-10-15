@@ -6,7 +6,11 @@ def start(ctx):
 
 @task
 def test(ctx):
-    ctx.run("pytest src", pty=True)
+    ctx.run("pytest --ignore=src/tests/performance_tests/ src", pty=True)
+
+@task
+def perf_test(ctx):
+    ctx.run("pytest src/tests/performance_tests", pty=True)
 
 @task
 def coverage(ctx):
