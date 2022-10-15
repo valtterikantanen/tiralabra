@@ -159,7 +159,8 @@ class UI:
     def _find_route(self, start_node, end_node):
         if self._chosen_algorithm.get() == "IDA*":
             start_time = time.time()
-            route, visited, distance = ida_star(self._graph, start_node, end_node)
+            route, distance = ida_star(self._graph, start_node, end_node)
+            visited = [False for _ in range(len(self._graph))]
             elapsed_time = f"{round(time.time() - start_time, 5)}"
         elif self._chosen_algorithm.get() == "Dijkstra":
             start_time = time.time()

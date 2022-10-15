@@ -2,25 +2,25 @@ from math import sqrt, inf
 
 
 def ida_star(graph, start_node, goal_node):
-    visited_nodes = [False for _ in range(len(graph))]
     # Otetaan arvioksi lyhin mahdollinen etäisyys lähtösolmusta maalisolmuun
     bound = _estimate_shortest_path(start_node, goal_node, int(sqrt(len(graph))))
     path = [start_node]
     while True:
+        # Jos lähtö- tai maalisolmussa on este, reittiä ei voi löytyä
+        if len(graph[start_node]) == 0 or len(graph[goal_node]) == 0:
+            return (path, inf)
         # Kasvatetaan arviota joka kierroksella, kunnes maalisolmu löytyy tai sinne ei ole reittiä
-        threshold = _search(graph, path, 0, bound, goal_node, visited_nodes)
+        threshold = _search(graph, start_node, 0, bound, goal_node, path)
         # Maalisolmu löytynyt
         if threshold is True:
-            return (path, visited_nodes, bound)
+            return (path, bound)
         if threshold == inf:
-            return False
+            return (path, threshold)
         bound = threshold
 
-
-def _search(graph, path, g_score, bound, goal_node, visited_nodes):
+def _search(graph, current_node, g_score, bound, goal_node, path):
     # Valitaan käsiteltäväksi polun viimeinen solmu
-    current_node = path[len(path)-1]
-    visited_nodes[current_node] = True
+    current_node = path[-1]
     # Uusi f-arvo on g-arvo lisättynä arviolla maalisolmun etäisyydestä
     f_score = g_score + _estimate_shortest_path(current_node, goal_node, int(sqrt(len(graph))))
     if f_score > bound:
@@ -35,14 +35,13 @@ def _search(graph, path, g_score, bound, goal_node, visited_nodes):
         if end_node not in path:
             path.append(end_node)
             # Kutsutaan funktiota rekursiivisesti niin että g-arvoon lisätään naapurin etäisyys
-            threshold = _search(graph, path, g_score+weight, bound, goal_node, visited_nodes)
+            threshold = _search(graph, end_node, g_score+weight, bound, goal_node, path)
             if threshold is True:
                 return True
             if threshold < minimum:
                 minimum = threshold
             path.pop()
     return minimum
-
 
 def _estimate_shortest_path(start_node, end_node, width):
     # Muutetaan ruutujen numerot x- ja y-koordinaateiksi
