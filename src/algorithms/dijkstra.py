@@ -18,11 +18,11 @@ def dijkstra(graph, start, end):
 
     # Alustetaan kaikki solmut käsittelemättömiksi
     visited = [False for _ in range(len(graph))]
-    previous = [None for _ in range(len(graph))]
     heap = Heap()
     # Alustetaan aloitussolmua lukuun ottamatta kaikkien solmujen etäisyyksiksi ääretön
-    distances = {node: inf for node in range(len(graph))}
-    distances[start] = 0
+    # Sanakirjaan lisätään tuplena tieto solmun etäisyydestä aloitussolmuun sekä sen edeltäjä
+    distances = {node: (inf, None) for node in range(len(graph))}
+    distances[start] = (0, None)
     heap.insert((0, start))
     while not heap.is_empty():
         node = heap.extract()[1]
@@ -33,22 +33,22 @@ def dijkstra(graph, start, end):
         visited[node] = True
         for edge in graph[node]:
             # Vieruslistan alkiot ovat muotoa (paino, tunnus)
-            current_distance = distances[edge[1]]
-            new_distance = distances[node] + edge[0]
+            current_distance = distances[edge[1]][0]
+            new_distance = distances[node][0] + edge[0]
             if new_distance < current_distance:
-                previous[edge[1]] = node
-                distances[edge[1]] = new_distance
+                distances[edge[1]] = (new_distance, node)
                 heap.insert((new_distance, edge[1]))
-    route = _create_route(previous, end)
+    route = _create_route(distances, end)
 
-    return route, visited, distances[end]
+    return route, visited, distances[end][0]
 
 
-def _create_route(previous_nodes, end_node):
+def _create_route(distances, end_node):
     """Muodostaa polun maalisolmusta aloitussolmuun.
 
     Args:
-        previous_nodes: Lista, jossa on tieto kunkin solmun edeltäjästä
+        distances: Sanakirja, jonka avaimina ovat solmujen tunnukset ja arvoina tuplet, joissa on
+        etäisyys aloitussolmusta sekä tieto solmun edeltäjästä
         end_node: Maalisolmun tunnus
 
     Returns:
@@ -56,9 +56,9 @@ def _create_route(previous_nodes, end_node):
     """
 
     route = [end_node]
-    i = end_node
-    while previous_nodes[i] is not None:
-        route.insert(0, previous_nodes[i])
-        i = previous_nodes[i]
+    previous_node = distances[end_node][1]
+    while previous_node is not None:
+        route.insert(0, previous_node)
+        previous_node = distances[previous_node][1]
 
     return route
