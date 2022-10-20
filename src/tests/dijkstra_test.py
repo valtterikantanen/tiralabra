@@ -2,8 +2,8 @@ from random import choice
 
 import unittest
 
-from dijkstra import dijkstra
-from graph import make_adjacency_lists
+from algorithms.dijkstra import dijkstra
+from util.graph import make_adjacency_lists
 
 
 class TestDijkstra(unittest.TestCase):

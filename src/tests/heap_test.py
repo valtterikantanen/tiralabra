@@ -3,7 +3,7 @@ import unittest
 from heapq import heappush, heappop
 from random import randint
 
-from heap import Heap
+from util.heap import Heap
 
 
 class TestHeap(unittest.TestCase):

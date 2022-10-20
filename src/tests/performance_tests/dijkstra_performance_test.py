@@ -1,8 +1,8 @@
 import unittest
 
-from dijkstra import dijkstra
+from algorithms.dijkstra import dijkstra
 from tests.dijkstra_test import collect_known_distances
-from graph import make_adjacency_lists
+from util.graph import make_adjacency_lists
 
 class TestDijkstra(unittest.TestCase):
     def setUp(self):

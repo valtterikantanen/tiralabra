@@ -3,9 +3,9 @@ from random import choice
 
 import unittest
 
-from ida_star import ida_star
-from dijkstra import dijkstra
-from graph import make_adjacency_lists
+from algorithms.ida_star import ida_star
+from algorithms.dijkstra import dijkstra
+from util.graph import make_adjacency_lists
 
 
 class TestIdaStar(unittest.TestCase):

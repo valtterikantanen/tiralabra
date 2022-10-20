@@ -1,6 +1,6 @@
 from math import inf
 
-from heap import Heap
+from util.heap import Heap
 
 
 def dijkstra(graph, start, end):

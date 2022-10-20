@@ -2,9 +2,10 @@ import os
 import time
 
 from tkinter import ttk, constants, StringVar, Canvas, messagebox
-from dijkstra import dijkstra
-from graph import make_adjacency_lists
-from ida_star import ida_star
+
+from algorithms.dijkstra import dijkstra
+from algorithms.ida_star import ida_star
+from util.graph import make_adjacency_lists
 
 
 class UI:
