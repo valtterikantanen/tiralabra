@@ -4,6 +4,7 @@ from algorithms.dijkstra import dijkstra
 from tests.dijkstra_test import collect_known_distances
 from util.graph import make_adjacency_lists
 
+
 class TestDijkstra(unittest.TestCase):
     def setUp(self):
         self.adjacency_lists = make_adjacency_lists("src/maps/Berlin_0_256.map")[0]

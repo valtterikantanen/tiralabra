@@ -45,6 +45,7 @@ def make_adjacency_lists(filename):
                     graph[width * i + j].append((weight, endpoint))
     return graph, map_rows
 
+
 def _create_map_from_file(filename):
     """Muodostaa annetusta karttatiedostosta listan.
 

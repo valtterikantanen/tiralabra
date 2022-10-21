@@ -18,6 +18,7 @@ def ida_star(graph, start_node, goal_node):
             return (path, threshold)
         bound = threshold
 
+
 def _search(graph, current_node, g_score, bound, goal_node, path):
     # Valitaan käsiteltäväksi polun viimeinen solmu
     current_node = path[-1]
@@ -42,6 +43,7 @@ def _search(graph, current_node, g_score, bound, goal_node, path):
                 minimum = threshold
             path.pop()
     return minimum
+
 
 def _estimate_shortest_path(start_node, end_node, width):
     # Muutetaan ruutujen numerot x- ja y-koordinaateiksi
