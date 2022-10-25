@@ -32,7 +32,7 @@ class UI:
         goal_node_entry = ttk.Entry(master=self._root, textvariable=self._ui_logic.end_node_input)
 
         selected_map_label = ttk.Label(
-            master=self._root, background="#F0F0F0", text="Valitse kartta")
+            master=self._root, background="#F0F0F0", text="Kartta")
         selected_map_dropdown = ttk.OptionMenu(self._root, self._ui_logic.selected_map,
                                                self._ui_logic.available_maps[0],
                                                *self._ui_logic.available_maps,
@@ -42,7 +42,7 @@ class UI:
         own_style.configure("Own.TRadiobutton", background="#F0F0F0")
 
         algorithm_label = ttk.Label(
-            master=self._root, background="#F0F0F0", text="Valitse algoritmi")
+            master=self._root, background="#F0F0F0", text="Algoritmi")
         ida_star_button = ttk.Radiobutton(master=self._root, text="IDA*", style="Own.TRadiobutton",
                                           variable=self._ui_logic.chosen_algorithm, takefocus=0, value="IDA*")
         dijkstra_button = ttk.Radiobutton(master=self._root, text="Dijkstra", style="Own.TRadiobutton",
@@ -66,7 +66,7 @@ class UI:
         goal_node_label.grid(row=3, column=1, padx=5, pady=5, sticky=constants.W)
         goal_node_entry.grid(row=3, column=2, columnspan=2, padx=5, pady=5, sticky=constants.W)
 
-        algorithm_label.grid(row=4, column=1, padx=5, pady=5)
+        algorithm_label.grid(row=4, column=1, padx=5, pady=5, sticky=constants.W)
         ida_star_button.grid(row=4, column=2, padx=15, sticky=constants.W)
         dijkstra_button.grid(row=4, column=3, padx=15, sticky=constants.E)
 
@@ -78,6 +78,7 @@ class UI:
 
         reset_btn.grid(row=7, column=0, columnspan=4, sticky=constants.EW, padx=5, pady=5)
 
+        # Hiiren vasemmalla painikkeella valitaan lähtöruutu ja oikealla maaliruutu
         self._grid.bind("<Button-1>", self._handle_click)
         self._grid.bind("<Button-3>", self._handle_click)
 
@@ -109,7 +110,9 @@ class UI:
         self._grid.create_rectangle(size*x, size*y, size*(x+1), size*(y+1), width=0, fill=color)
 
     def _handle_click(self, event):
-        self._ui_logic.handle_click(event)
+        if self._ui_logic.handle_click(event) is False:
+            messagebox.showerror(title="Virhe", message="Valitsit ruudun, jossa on este!")
+            return
         self._update_map()
 
     def _handle_validate_input(self):

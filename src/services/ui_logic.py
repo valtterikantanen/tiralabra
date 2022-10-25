@@ -20,13 +20,12 @@ class UILogic:
         self.available_maps = self._get_available_maps()
         self.selected_map = StringVar(value=self.available_maps[0])
 
-        self._graph = None
-        self._map_rows = None
-        self._map_height = None
         self.map_width = None
+        self._map_height = None
+        self._map_rows = None
+        self._graph = None
         self._start_node = None
         self._end_node = None
-
         self._route = None
         self._visited_nodes = None
 
@@ -55,6 +54,8 @@ class UILogic:
         self.shortest_path_length.set("")
         self._route = None
         self._visited_nodes = None
+        self._start_node = None
+        self._end_node = None
 
     def handle_click(self, event):
         width = self.grid_width / self.map_width
@@ -64,14 +65,23 @@ class UILogic:
         y_coord = int(event.y // height)
 
         coord_as_str = f"{x_coord}, {y_coord}"
+        node_number = self.get_node_number(coord_as_str)
+
+        if self._is_obstacle(node_number):
+            return False
+
+        if self._route is not None:
+            self.reset_map()
 
         # Aloitusruutu asetetaan hiiren vasemmalla näppäimellä, jolloin numero on 1, oikealla 3
         if event.num == 1:
             self.start_node_input.set(coord_as_str)
-            self._start_node = self.get_node_number(coord_as_str)
+            self._start_node = node_number
         elif event.num == 3:
             self.end_node_input.set(coord_as_str)
-            self._end_node = self.get_node_number(coord_as_str)
+            self._end_node = node_number
+
+        return True
 
     def find_route(self):
         if self.chosen_algorithm.get() == "IDA*":
