@@ -14,7 +14,7 @@ class TestUILogic(unittest.TestCase):
 
     def test_finds_all_available_maps(self):
         maps = self.ui_logic._get_available_maps()
-        self.assertEqual(len(maps), 2)
+        self.assertEqual(len(maps), 3)
 
     def test_reset_map_resets_variables(self):
         self.ui_logic.start_node_input.set("0, 0")
