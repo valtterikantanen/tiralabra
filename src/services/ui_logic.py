@@ -84,20 +84,21 @@ class UILogic:
         return True
 
     def find_route(self):
+        start_time = time.time()
         if self.chosen_algorithm.get() == "IDA*":
-            start_time = time.time()
             self._route, distance = ida_star(self._graph, self._start_node, self._end_node)
             self._visited_nodes = [False for _ in range(len(self._graph))]
-            elapsed_time = f"{round(time.time() - start_time, 5)}"
         elif self.chosen_algorithm.get() == "Dijkstra":
-            start_time = time.time()
             self._route, self._visited_nodes, distance = dijkstra(
                 self._graph, self._start_node, self._end_node)
-            elapsed_time = f"{round(time.time() - start_time, 5)}"
+        else:
+            return
+        elapsed_time = f"{round(time.time() - start_time, 5)}"
         distance = f"{round(distance, 5)}"
         distance = "∞" if distance == "inf" else distance
         self.shortest_path_length.set(f"{distance.replace('.', ',')}")
         self.used_time.set(f"{elapsed_time.replace('.', ',')} s")
+        print(self._route)
 
     def validate_input(self):
         error_msg = ""
