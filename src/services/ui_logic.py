@@ -98,7 +98,6 @@ class UILogic:
         distance = "∞" if distance == "inf" else distance
         self.shortest_path_length.set(f"{distance.replace('.', ',')}")
         self.used_time.set(f"{elapsed_time.replace('.', ',')} s")
-        print(self._route)
 
     def validate_input(self):
         error_msg = ""
