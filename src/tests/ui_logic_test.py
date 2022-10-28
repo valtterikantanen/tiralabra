@@ -27,7 +27,8 @@ class TestUILogic(unittest.TestCase):
 
     def test_create_map_creates_correct_map_with_parameter(self):
         map_row = self.map_rows[2]
-        correct_row = [".", "@", "@", "@", ".", ".", ".", ".", ".", ".", ".", "@", "@", ".", ".", ".", ".", ".", ".", "."]
+        correct_row = [".", "@", "@", "@", ".", ".", ".", ".", ".",
+                       ".", ".", "@", "@", ".", ".", ".", ".", ".", ".", "."]
         self.assertEqual(map_row, correct_row)
 
     def test_create_map_creates_correct_map_without_parameter(self):
@@ -96,13 +97,15 @@ class TestUILogic(unittest.TestCase):
         self.ui_logic.start_node_input.set("2, 19")
         self.ui_logic.end_node_input.set("21, 21")
         self.ui_logic.chosen_algorithm.set("Dijkstra")
-        self.assertEqual(self.ui_logic.validate_input(), "Koordinaattien on oltava välillä 0–19, 0–19")
+        self.assertEqual(self.ui_logic.validate_input(),
+                         "Koordinaattien on oltava välillä 0–19, 0–19")
 
     def test_validate_input_when_start_node_is_not_empty(self):
         self.ui_logic.start_node_input.set("1, 2")
         self.ui_logic.end_node_input.set("2, 19")
         self.ui_logic.chosen_algorithm.set("IDA*")
-        self.assertEqual(self.ui_logic.validate_input(), "Valitsit alku- tai loppupisteeksi ruudun, jossa on este!")
+        self.assertEqual(self.ui_logic.validate_input(),
+                         "Valitsit alku- tai loppupisteeksi ruudun, jossa on este!")
 
     def test_get_node_number_returns_false_with_unvalid_coordinates(self):
         self.assertEqual(self.ui_logic.get_node_number("a, 0"), False)
