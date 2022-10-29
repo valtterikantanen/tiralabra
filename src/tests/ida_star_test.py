@@ -57,6 +57,6 @@ class TestIdaStar(unittest.TestCase):
         self.assertEqual(distance, inf)
 
     def test_ida_star_returns_inf_when_end_node_is_unreachable(self):
-        self.adjacency_lists, self.graph = make_adjacency_lists("src/maps/Map_5.map")
+        self.adjacency_lists = make_adjacency_lists("src/maps/Map_5.map")[0]
         distance = ida_star(self.adjacency_lists, 10, 12)[1]
         self.assertEqual(distance, inf)

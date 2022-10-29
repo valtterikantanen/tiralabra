@@ -9,7 +9,15 @@ from util.graph import make_adjacency_lists
 
 
 class UILogic:
+    """Käyttöliittymälogiikasta vastaava luokka."""
+
     def __init__(self, grid_width=600):
+        """Luokan konstruktori.
+
+        Args:
+            grid_width: Käyttöliittymään haluttu kartan leveys (pikseleinä). Oletuksena 600.
+        """
+
         self.grid_width = grid_width
 
         self.start_node_input = StringVar()
@@ -30,6 +38,12 @@ class UILogic:
         self._visited_nodes = None
 
     def _get_available_maps(self):
+        """Hakee hakemistossa src/maps sijaitsevat kartat.
+
+        Returns:
+            Lista karttatiedostojen nimistä.
+        """
+
         available_maps = []
         for file in os.listdir("src/maps"):
             if file.endswith(".map"):
@@ -37,6 +51,15 @@ class UILogic:
         return available_maps
 
     def create_map(self, map_file=None):
+        """Luo annetusta kartasta olion, jonka perusteella voidaan laatia visuaalinen vastine.
+
+        Args:
+            map_file: Käytettävän kartan nimi, oletuksena None (jolloin haetaan valittu kartta).
+
+        Returns:
+            Tuple, jossa on kartta matriisimuodossa sekä yhden ruudun koko pikseleinä.
+        """
+
         map_file = self.selected_map.get() if map_file is None else map_file
         self._graph, self._map_rows = make_adjacency_lists(f"src/maps/{map_file}")
         self._map_height = len(self._map_rows)
@@ -46,6 +69,8 @@ class UILogic:
         return self._map_rows, square_size
 
     def reset_map(self):
+        """Palauttaa kartan alkutilanteeseen ja nollaa muuttujat."""
+
         self.create_map()
 
         self.start_node_input.set("")
@@ -58,6 +83,15 @@ class UILogic:
         self._end_node = None
 
     def handle_click(self, event):
+        """Vastaa kartan klikkauksen käsittelystä
+
+        Args:
+            event: TkInterin Event-olio, joka sisältää tiedot klikkauksesta.
+
+        Returns:
+            False, jos aloitus- tai lähtösolmua ei voitu valita, muuten True.
+        """
+
         width = self.grid_width / self.map_width
         height = self.grid_width / self._map_height
 
@@ -84,6 +118,8 @@ class UILogic:
         return True
 
     def find_route(self):
+        """Hakee lyhimmän reitin kahden annetun solmun välillä."""
+
         start_time = time.time()
         if self.chosen_algorithm.get() == "IDA*":
             self._route, distance = ida_star(self._graph, self._start_node, self._end_node)
@@ -93,13 +129,31 @@ class UILogic:
                 self._graph, self._start_node, self._end_node)
         else:
             return
-        elapsed_time = f"{round(time.time() - start_time, 5)}"
+        elapsed_time = time.time() - start_time
+        self._set_time_and_distance(elapsed_time, distance)
+
+    def _set_time_and_distance(self, time, distance):
+        """Asettaa käyttöliittymän muuttujiin lyhimmän etäisyyden kahden
+        pisteen välillä ja reitin etsintään käytetyn ajan.
+
+        Args:
+            time: Reitin etsintään käytetty aika
+            distance: Lyhimmän löydetyn reitin pituus
+        """
+
+        time = f"{round(time, 5)}"
         distance = f"{round(distance, 5)}"
         distance = "∞" if distance == "inf" else distance
         self.shortest_path_length.set(f"{distance.replace('.', ',')}")
-        self.used_time.set(f"{elapsed_time.replace('.', ',')} s")
+        self.used_time.set(f"{time.replace('.', ',')} s")
 
     def validate_input(self):
+        """Tarkistaa, että tarvittavat syötteet ovat oikein.
+
+        Returns:
+            Jos virheitä ei ollut, palauttaa tyhjän merkkijonon, muuten virheviestin.
+        """
+
         error_msg = ""
         algorithm = self.chosen_algorithm.get()
         self._start_node = self.get_node_number(self.start_node_input.get())
@@ -123,18 +177,54 @@ class UILogic:
         return error_msg
 
     def _validate_node_number(self, node):
+        """Tarkistaa, että solmun numero on sallitulla välillä.
+
+        Args:
+            node: Kokonaisluku, joka edustaa solmun tunnusta.
+
+        Returns:
+            True, jos solmun numero on mahdollinen, muuten False.
+        """
+
         return 0 <= node < len(self._graph)
 
     def _is_obstacle(self, node):
+        """Tarkistaa, onko parametrina annetussa solmussa este.
+
+        Args:
+            node: Kokonaisluku, joka edustaa solmun tunnusta.
+
+        Returns:
+            True, jos solmussa on este, muuten False.
+        """
+
         x_coord, y_coord = self._get_coordinates(node)
         return self._map_rows[y_coord][x_coord] == "@"
 
     def _get_coordinates(self, node):
+        """Muuttaa solmun tunnuksen koordinaateiksi.
+
+        Args:
+            node: Solmun tunnusta edustava kokonaisluku.
+
+        Returns:
+            Tuple, jossa on solmun x- ja y-koordinaatit.
+        """
+
         x_coord = node % self.map_width
         y_coord = node // self.map_width
         return x_coord, y_coord
 
     def get_node_number(self, node):
+        """Muuttaa koordinaatit solmun tunnukseksi.
+
+        Args:
+            node: Merkkijono muotoa "x, y"
+
+        Returns:
+            Jos syöte oli vaadittua muotoa, palauttaa solmun tunnuksen, muuten False.
+        """
+
         try:
             node = node.split(",")
             if len(node) != 2:
@@ -147,6 +237,16 @@ class UILogic:
             return False
 
     def get_node_color(self, node):
+        """Palauttaa solmun värin kartan piirtämistä varten.
+
+        Args:
+            node: Solmun tunnus.
+
+        Returns:
+            Merkkijono, joka on tyhjä (jolloin solmu ei kuulu polkuun tai vierailtuihin solmuihin)
+            tai green, red tai yellow solmun roolin mukaan.
+        """
+
         color = ""
         if self._route is None:
             if node in (self._start_node, self._end_node):

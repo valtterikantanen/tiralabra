@@ -27,11 +27,12 @@ class TestUILogic(unittest.TestCase):
 
     def test_create_map_creates_correct_map_with_parameter(self):
         map_row = self.map_rows[2]
-        correct_row = [".", "@", "@", "@", ".", ".", ".", ".", ".",
-                       ".", ".", "@", "@", ".", ".", ".", ".", ".", ".", "."]
+        correct_row = [".", "@", "@", "@", ".", ".", ".", ".", ".", ".",
+                       ".", "@", "@", ".", ".", ".", ".", ".", ".", "."]
         self.assertEqual(map_row, correct_row)
 
     def test_create_map_creates_correct_map_without_parameter(self):
+        self.ui_logic.selected_map.set("Map_20.map")
         map_rows = self.ui_logic.create_map()[0]
         self.assertEqual(map_rows, self.map_rows)
 

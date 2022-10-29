@@ -4,8 +4,16 @@ from services.ui_logic import UILogic
 
 
 class UI:
+    """Sovelluksen käyttöliittymästä vastaava luokka."""
 
     def __init__(self, root, ui_logic: UILogic):
+        """Luokan konstruktori. Luo uuden käyttöliittymästä vastaavan olion.
+
+        Args:
+            root: TkInterin juurielementti, jonka sisään näkymä alustetaan.
+            ui_logic: UILogic-luokan olio, joka sisältää käyttöliittymän logiikan.
+        """
+
         self._root = root
         self._ui_logic = ui_logic
         self._root.configure(bg="#F0F0F0")
@@ -13,9 +21,11 @@ class UI:
         self._grid = Canvas(master=self._root, height=self._ui_logic.grid_width,
                             width=self._ui_logic.grid_width)
 
+    def start(self):
+        """Käynnistää käyttöliittymän."""
+
         self._draw_map()
 
-    def start(self):
         time_label = ttk.Label(master=self._root, background="#F0F0F0", text="Aikaa kului")
         time_elapsed = ttk.Label(master=self._root, background="#F0F0F0",
                                  textvariable=self._ui_logic.used_time)
@@ -49,7 +59,7 @@ class UI:
                                           variable=self._ui_logic.chosen_algorithm, takefocus=0, value="Dijkstra")
 
         find_route_btn = ttk.Button(
-            master=self._root, text="Löydä lyhin reitti", command=self._handle_validate_input)
+            master=self._root, text="Löydä lyhin reitti", command=self._handle_find_route)
 
         reset_btn = ttk.Button(master=self._root, text="Tyhjennä", command=self._handle_reset_map)
 
@@ -83,6 +93,13 @@ class UI:
         self._grid.bind("<Button-3>", self._handle_click)
 
     def _draw_map(self, map_file=None):
+        """Piirtää kartan joko valitun kartan tai karttatiedoston perusteella.
+
+        Args:
+            map_file: Karttatiedoston nimi. Vapaaehtoinen, oletuksena None, jolloin piirretään
+            se kartta, joka on valittu käyttöliittymästä.
+        """
+
         map_rows, square_size = self._ui_logic.create_map(map_file)
 
         for y, row in enumerate(map_rows):
@@ -91,10 +108,19 @@ class UI:
                 self._draw_rectangle(square_size, x, y, color)
 
     def _handle_reset_map(self, map_file=None):
+        """Piirtää kartan uudelleen ja tyhjentää käyttöliittymästä reitin pituuden ja muut muuttujat.
+
+        Args:
+            map_file: Karttatiedoston nimi. Vapaaehtoinen, oletuksena None, jolloin piirretään
+            se kartta, joka on valittu käyttöliittymästä.
+        """
+
         self._ui_logic.reset_map()
         self._draw_map(map_file)
 
     def _update_map(self):
+        """Päivittää kartan silloin, kun alku- ja loppupiste on valittu graafisesti."""
+
         self._draw_map()
         square_size = self._ui_logic.grid_width / self._ui_logic.map_width
 
@@ -107,15 +133,32 @@ class UI:
                 self._draw_rectangle(square_size, x, y, color)
 
     def _draw_rectangle(self, size, x, y, color):
+        """Piirtää karttaan määrätyn kokoisen neliön.
+
+        Args:
+            size: Neliön sivun koko pikseleinä.
+            x: Neliön vasemman yläkulman x-koordinaatti.
+            y: Neliön vasemman yläkulman y-koordinaatti.
+            color: Neliön väri.
+        """
+
         self._grid.create_rectangle(size*x, size*y, size*(x+1), size*(y+1), width=0, fill=color)
 
     def _handle_click(self, event):
+        """Vastaa kartan klikkauksen käsittelystä, ja esittää mahdollisen virheilmoituksen.
+
+        Args:
+            event: TkInterin Event-olio, joka sisältää tiedot klikkauksesta.
+        """
+
         if self._ui_logic.handle_click(event) is False:
             messagebox.showerror(title="Virhe", message="Valitsit ruudun, jossa on este!")
             return
         self._update_map()
 
-    def _handle_validate_input(self):
+    def _handle_find_route(self):
+        """Validoi käyttäjän antaman syötteen, ja etsii lyhimmän reitin kahden pisteen välillä."""
+
         error_msg = self._ui_logic.validate_input()
         if error_msg:
             messagebox.showerror(title="Virhe", message=error_msg)

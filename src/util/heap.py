@@ -2,12 +2,10 @@ from math import floor
 
 
 class Heap:
-    """Minimikeon toteuttava luokka.
-    """
+    """Minimikeon toteuttava luokka."""
 
     def __init__(self):
-        """Luokan konstruktori, joka luo uuden keon.
-        """
+        """Luokan konstruktori, joka luo uuden keon."""
 
         self.__heap = [None]
 
@@ -56,8 +54,7 @@ class Heap:
         return smallest_item
 
     def _restore_heap_condition(self):
-        """Palauttaa kekoehdon voimaan alkion poiston jälkeen.
-        """
+        """Palauttaa kekoehdon voimaan alkion poiston jälkeen."""
 
         # Lasketaan juureen nostettua alkiota alaspäin, kunnes kekoehto on jälleen voimassa
         position = 1
@@ -65,7 +62,7 @@ class Heap:
         while left_child_position <= self.size():
             right_child_position = left_child_position + 1
             # Oletetaan aluksi, että pienempi lapsi on vasemmalla
-            # Jos oikea lapsi on olemassa, ja se on pienempi kuin vasen solmu, valitaan se
+            # Jos oikea lapsi on olemassa ja se on pienempi kuin vasen solmu, valitaan se
             smaller_child_position = left_child_position
             if right_child_position <= self.size():
                 if self.__heap[right_child_position] < self.__heap[left_child_position]:
