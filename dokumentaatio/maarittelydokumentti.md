@@ -20,6 +20,6 @@ Torikka, Oskari: [_A*-algoritmi ja siihen pohjautuvat muistirajoitetut heuristis
 
 Laaksonen, Antti: [_Tietorakenteet ja algoritmit_](https://raw.githubusercontent.com/hy-tira/tirakirja/master/tirakirja.pdf).
 
-Kord, Richard ym.: [*Time complexity of iterative-deepening-A\**](https://www.sciencedirect.com/science/article/pii/S0004370201000947/pdf?md5=6685f651efae7e0f243de5d7d4522aba&pid=1-s2.0-S0004370201000947-main.pdf).
+Korf, Richard ym.: *Time complexity of iterative-deepening-A\**. Artificial Intelligence, 129 (1–2): 199–218. 2001. DOI: [10.1016/S0004-3702(01)00094-7](https://doi.org/10.1016/S0004-3702(01)00094-7).
 
 [*Iterative deepening A\**](https://en.wikipedia.org/wiki/Iterative_deepening_A*).

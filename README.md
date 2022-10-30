@@ -7,6 +7,7 @@ Sovellus on laadittu Helsingin yliopiston syksyn 2022 kurssille [Aineopintojen h
 * [Määrittelydokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/maarittelydokumentti.md)
 * [Testausdokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/testausdokumentti.md)
 * [Toteutusdokumentti](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/toteutusdokumentti.md)
+* [Käyttöohje](https://github.com/valtterikantanen/tiralabra/blob/master/dokumentaatio/kayttoohje.md)
 
 ### Viikkoraportit
 
@@ -58,4 +59,4 @@ $ poetry run invoke lint
 
 ## Huomautuksia
 
-Ohjelman testaukseen käytetyt [kartat ja testireitit](https://github.com/valtterikantanen/tiralabra/blob/master/src/maps) on ladattu [Moving AI Labin](https://www.movingai.com/benchmarks/index.html) kotisivuilta. Kartat on lisensoitu [Open Data Commons Attribution License](https://opendatacommons.org/licenses/by/1-0/) -lisenssillä.
+Ohjelman testaukseen käytettävistä kartoista [yksi](https://github.com/valtterikantanen/tiralabra/blob/master/src/maps/Berlin_0_256.map) on ladattu [Moving AI Labin](https://www.movingai.com/benchmarks/index.html) kotisivuilta. Samalla on ladattu myös karttaan liittyvät [testiskenaariot](https://github.com/valtterikantanen/tiralabra/blob/master/src/maps/Berlin_0_256.map.scen). Tiedostot on lisensoitu [Open Data Commons Attribution License](https://opendatacommons.org/licenses/by/1-0/) -lisenssillä.
