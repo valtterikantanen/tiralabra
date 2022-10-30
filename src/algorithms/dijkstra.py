@@ -3,8 +3,8 @@ from math import inf
 from util.heap import Heap
 
 
-def dijkstra(graph, start, end):
-    """Määrittää lyhimmän reitin kahden solmun välillä annetussa verkossa.
+def dijkstra(graph, start, goal):
+    """Määrittää lyhimmän reitin kahden solmun välillä annetussa verkossa Dijkstran algoritmilla.
 
     Args:
         graph: Käytettävä verkko vieruslistamuodossa
@@ -28,7 +28,7 @@ def dijkstra(graph, start, end):
         node = heap.extract()[1]
         if visited[node]:
             continue
-        if node == end:
+        if node == goal:
             break
         visited[node] = True
         for edge in graph[node]:
@@ -38,9 +38,9 @@ def dijkstra(graph, start, end):
             if new_distance < current_distance:
                 distances[edge[1]] = (new_distance, node)
                 heap.insert((new_distance, edge[1]))
-    route = _create_route(distances, end)
+    route = _create_route(distances, goal)
 
-    return route, visited, distances[end][0]
+    return route, visited, distances[goal][0]
 
 
 def _create_route(distances, end_node):
