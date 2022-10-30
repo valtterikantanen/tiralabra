@@ -43,7 +43,6 @@ fail-under=10.0
 
 # Files or directories to be skipped. They should be base names, not paths.
 ignore=CVS,
-       ui,
        tests
 
 # Add files or directories matching the regular expressions patterns to the
@@ -305,7 +304,9 @@ good-names=i,
            Run,
            _,
            id,
-           ui
+           ui,
+           x,
+           y
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted

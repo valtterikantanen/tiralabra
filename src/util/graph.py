@@ -29,19 +29,19 @@ def make_adjacency_lists(filename):
                 continue
             # Käydään läpi kaikki mahdolliset naapurisolmut
             for option in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]:
-                y_coord = i + option[0]
-                x_coord = j + option[1]
+                y = i + option[0]
+                x = j + option[1]
                 # Tarkistetaan, menevätkö koordinaatit reunojen yli
-                if not 0 <= x_coord < width or not 0 <= y_coord < height:
+                if not 0 <= x < width or not 0 <= y < height:
                     continue
                 # Viistoon voidaan liikkua vain, jos kaksi sen viereistä ruutua ovat vapaana
-                if 0 not in option and map_rows[y_coord][j] != empty or row[x_coord] != empty:
+                if 0 not in option and map_rows[y][j] != empty or row[x] != empty:
                     continue
-                if map_rows[y_coord][x_coord] == empty:
+                if map_rows[y][x] == empty:
                     # Jos liikuttiin vaaka- tai pystysuunnassa, kaaren paino on 1, muuten sqrt(2)
                     weight = 1 if 0 in option else sqrt(2)
                     # Solmun tunnus saadaan kaavalla leveys * y-koordinaatti + x-koordinaatti
-                    endpoint = width * y_coord + x_coord
+                    endpoint = width * y + x
                     graph[width * i + j].append((weight, endpoint))
     return graph, map_rows
 

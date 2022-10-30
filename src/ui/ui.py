@@ -54,9 +54,12 @@ class UI:
         algorithm_label = ttk.Label(
             master=self._root, background="#F0F0F0", text="Algoritmi")
         ida_star_button = ttk.Radiobutton(master=self._root, text="IDA*", style="Own.TRadiobutton",
-                                          variable=self._ui_logic.chosen_algorithm, takefocus=0, value="IDA*")
-        dijkstra_button = ttk.Radiobutton(master=self._root, text="Dijkstra", style="Own.TRadiobutton",
-                                          variable=self._ui_logic.chosen_algorithm, takefocus=0, value="Dijkstra")
+                                          takefocus=0, variable=self._ui_logic.chosen_algorithm,
+                                          value="IDA*")
+        dijkstra_button = ttk.Radiobutton(master=self._root, text="Dijkstra",
+                                          style="Own.TRadiobutton", takefocus=0,
+                                          variable=self._ui_logic.chosen_algorithm,
+                                          value="Dijkstra")
 
         find_route_btn = ttk.Button(
             master=self._root, text="Löydä lyhin reitti", command=self._handle_find_route)
@@ -108,7 +111,8 @@ class UI:
                 self._draw_rectangle(square_size, x, y, color)
 
     def _handle_reset_map(self, map_file=None):
-        """Piirtää kartan uudelleen ja tyhjentää käyttöliittymästä reitin pituuden ja muut muuttujat.
+        """Piirtää kartan uudelleen ja tyhjentää käyttöliittymästä
+        reitin pituuden ja muut muuttujat.
 
         Args:
             map_file: Karttatiedoston nimi. Vapaaehtoinen, oletuksena None, jolloin piirretään

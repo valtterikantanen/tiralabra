@@ -95,10 +95,10 @@ class UILogic:
         width = self.grid_width / self.map_width
         height = self.grid_width / self._map_height
 
-        x_coord = int(event.x // width)
-        y_coord = int(event.y // height)
+        x = int(event.x // width)
+        y = int(event.y // height)
 
-        coord_as_str = f"{x_coord}, {y_coord}"
+        coord_as_str = f"{x}, {y}"
         node_number = self.get_node_number(coord_as_str)
 
         if self._is_obstacle(node_number):
@@ -129,23 +129,23 @@ class UILogic:
                 self._graph, self._start_node, self._end_node)
         else:
             return
-        elapsed_time = time.time() - start_time
-        self._set_time_and_distance(elapsed_time, distance)
+        used_time = time.time() - start_time
+        self._set_used_time_and_distance(used_time, distance)
 
-    def _set_time_and_distance(self, time, distance):
+    def _set_used_time_and_distance(self, used_time, distance):
         """Asettaa käyttöliittymän muuttujiin lyhimmän etäisyyden kahden
         pisteen välillä ja reitin etsintään käytetyn ajan.
 
         Args:
-            time: Reitin etsintään käytetty aika
+            used_time: Reitin etsintään käytetty aika
             distance: Lyhimmän löydetyn reitin pituus
         """
 
-        time = f"{round(time, 5)}"
+        used_time = f"{round(used_time, 5)}"
         distance = f"{round(distance, 5)}"
         distance = "∞" if distance == "inf" else distance
         self.shortest_path_length.set(f"{distance.replace('.', ',')}")
-        self.used_time.set(f"{time.replace('.', ',')} s")
+        self.used_time.set(f"{used_time.replace('.', ',')} s")
 
     def validate_input(self):
         """Tarkistaa, että tarvittavat syötteet ovat oikein.
@@ -198,8 +198,8 @@ class UILogic:
             True, jos solmussa on este, muuten False.
         """
 
-        x_coord, y_coord = self._get_coordinates(node)
-        return self._map_rows[y_coord][x_coord] == "@"
+        x, y = self._get_coordinates(node)
+        return self._map_rows[y][x] == "@"
 
     def _get_coordinates(self, node):
         """Muuttaa solmun tunnuksen koordinaateiksi.
@@ -211,9 +211,9 @@ class UILogic:
             Tuple, jossa on solmun x- ja y-koordinaatit.
         """
 
-        x_coord = node % self.map_width
-        y_coord = node // self.map_width
-        return x_coord, y_coord
+        x = node % self.map_width
+        y = node // self.map_width
+        return x, y
 
     def get_node_number(self, node):
         """Muuttaa koordinaatit solmun tunnukseksi.
