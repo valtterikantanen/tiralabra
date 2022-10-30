@@ -10,7 +10,7 @@ Sovellus löytää kartalta lyhimmän reitin kahden pisteen välillä. Ohjelman 
 
 ## Asennus
 
-Aloita lataamalla sovelluksen lähdekoodi [zip-tiedostona](https://github.com/valtterikantanen/tiralabra/archive/refs/heads/master.zip) tai kloonaa projekti komennolla
+Aloita lataamalla sovelluksen lähdekoodi [zip-tiedostona](https://github.com/valtterikantanen/tiralabra/releases/tag/loppupalautus) tai kloonaa projekti komennolla
 
 ```bash
 $ git clone https://github.com/valtterikantanen/tiralabra.git

@@ -24,7 +24,7 @@ Sovellus on laadittu Helsingin yliopiston syksyn 2022 kurssille [Aineopintojen h
 
 Varmista tarvittaessa, että tietokoneellesi on asennettu [Poetry](https://python-poetry.org/). Tämän voi tehdä komennolla `poetry --version`, jonka tulisi tulostaa asennettu versio. Jos Poetrya ei ole asennettu, esimerkiksi [Ohjelmistotekniikka-kurssin materiaalista](https://ohjelmistotekniikka-hy.github.io/python/viikko2#poetry-ja-riippuvuuksien-hallinta) voi katsoa ohjeet asennukseen.
 
-Aloita lataamalla sovelluksen lähdekoodi [zip-tiedostona](https://github.com/valtterikantanen/tiralabra/archive/refs/heads/master.zip) tai kloonaa projekti komennolla
+Aloita lataamalla sovelluksen lähdekoodi [zip-tiedostona](https://github.com/valtterikantanen/tiralabra/releases/tag/loppupalautus) tai kloonaa projekti komennolla
 
 ```bash
 $ git clone https://github.com/valtterikantanen/tiralabra.git
